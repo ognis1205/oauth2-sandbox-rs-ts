@@ -1,21 +1,9 @@
-variable "access_key" {
-  type = string
-}
-
-variable "secret_key" {
-  type = string
-}
-
-variable "region" {
-  type = string
-}
-
-variable "bucket" {
-  type = string
-}
-
-provider "aws" {
-  access_key = var.access_key
-  secret_key = var.secret_key
-  region     = var.region
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.23.1"
+    }
+  }
+  required_version = ">= 1.4.6"
 }
