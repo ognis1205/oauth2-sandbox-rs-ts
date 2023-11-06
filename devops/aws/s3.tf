@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "this" {
-  bucket        = var.bucket
+  bucket        = "${var.prefix}-bucket"
   force_destroy = true
   tags = {
-    Name = "delta-sharing-s3"
+    Name = "${var.prefix}-tag"
   }
 }
 

@@ -10,6 +10,6 @@ variable "region" {
   type = string
 }
 
-variable "bucket" {
+variable "prefix" {
   type = string
 }
