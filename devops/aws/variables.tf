@@ -1,3 +1,15 @@
+variable "service_arn" {
+  type = string
+}
+
+variable "provider_arn" {
+  type = string
+}
+
+variable "external_id" {
+  type = string
+}
+
 variable "access_key" {
   type = string
 }
