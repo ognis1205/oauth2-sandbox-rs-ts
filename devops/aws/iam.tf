@@ -16,8 +16,8 @@ data "aws_iam_policy_document" "assume_role_with_external_id" {
   }
 }
 
-resource "aws_iam_role" "provider" {
-  name               = "${var.prefix}-provider"
+resource "aws_iam_role" "this" {
+  name               = "${var.prefix}-provider-role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_with_external_id.json
 }
 
@@ -40,11 +40,17 @@ data "aws_iam_policy_document" "allow_access_to_s3" {
     actions = [
       "sts:AssumeRole",
     ]
-    resources = [aws_iam_role.provider.arn]
+    resources = [aws_iam_role.this.arn]
   }
 }
 
 resource "aws_iam_policy" "this" {
-  name   = "${var.prefix}-policy"
+  name   = "${var.prefix}-provider-policy"
   policy = data.aws_iam_policy_document.allow_access_to_s3.json
+}
+
+resource "aws_iam_policy_attachment" "this" {
+  name       = "${var.prefix}-provider-policy-attachment"
+  roles      = ["${aws_iam_role.this.name}"]
+  policy_arn = "${aws_iam_policy.this.arn}"
 }
