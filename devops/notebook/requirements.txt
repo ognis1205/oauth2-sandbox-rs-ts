@@ -1,0 +1,6 @@
+notebook
+boto3
+google-cloud-storage
+deltalake
+pandas
+delta-sharing
